@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robótica Galdino de Lima</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- ESTILOS (CSS) --- */
+        :root {
+            --primary: #00e5ff; /* Azul Ciano Neon */
+            --secondary: #0044ff; /* Azul Escuro */
+            --accent: #ffea00; /* Amarelo */
+            --dark-bg: #0b1120; 
+            --card-bg: #162032;
+            --text-color: #f1f5f9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* HEADER */
+        header {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(11, 17, 32, 0.95);
+            padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; border-bottom: 2px solid var(--secondary);
+            backdrop-filter: blur(5px);
+        }
+
+        .logo { font-size: 1.1rem; font-weight: bold; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--accent); }
+        
+        nav ul { display: flex; gap: 20px; list-style: none; }
+        nav a { text-decoration: none; color: white; font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--primary); }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,68,255,0.2)), url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?q=80&w=2069&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+
+        .hero-content h1 { 
+            font-size: 3rem; margin-bottom: 15px; 
+            text-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+        }
+        .hero-content p { font-size: 1.2rem; margin-bottom: 30px; color: #ccc; letter-spacing: 1px; }
+        
+        .btn {
+            padding: 12px 30px; border-radius: 5px; font-weight: bold; text-decoration: none; text-transform: uppercase; display: inline-block; transition: 0.3s;
+        }
+        .btn-primary { background: var(--secondary); color: white; border: 1px solid var(--secondary); }
+        .btn-primary:hover { background: var(--primary); color: #000; border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
+
+        /* SECTIONS GERAL */
+        section { padding: 80px 10%; }
+        .section-title { font-size: 2rem; text-align: center; margin-bottom: 50px; color: var(--primary); position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent); margin: 10px auto 0; }
+
+        /* SOBRE */
+        .about-text { text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 1.1rem; }
+        .highlight { color: var(--accent); font-weight: bold; }
+
+        /* QUEM PODE PARTICIPAR */
+        .join-container {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;
+        }
+        .join-card {
+            background: rgba(255,255,255,0.05); padding: 30px; border-radius: 10px;
+            text-align: center; max-width: 350px; border: 1px solid transparent; transition: 0.3s;
+        }
+        .join-card:hover { border-color: var(--accent); transform: scale(1.02); }
+        .join-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
+        .join-card h3 { margin-bottom: 15px; color: white; }
+        .join-card p { color: #ccc; font-size: 0.95rem; }
+
+        /* ROBÔS (GRID 4 COLUNAS) */
+        .robots-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .robot-card {
+            background: var(--card-bg); border-radius: 10px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05); text-align: center;
+            transition: 0.3s;
+        }
+        .robot-card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        .robot-icon { font-size: 3rem; margin: 20px 0; color: var(--secondary); }
+        .robot-info { padding: 20px; }
+        .robot-info h3 { color: white; margin-bottom: 10px; font-size: 1.2rem; }
+        .robot-info p { font-size: 0.9rem; color: #aaa; }
+
+        /* EVENTOS (GRID 2 COLUNAS) */
+        .events-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; margin-top: 20px;
+        }
+        .event-card {
+            background: linear-gradient(45deg, #162032, #1e293b);
+            padding: 30px; border-left: 5px solid var(--accent); border-radius: 5px;
+        }
+        .event-card h3 { color: var(--accent); margin-bottom: 10px; }
+
+        /* FOOTER */
+        footer {
+            background: #050a15; padding: 40px; text-align: center; border-top: 1px solid #333;
+        }
+        .instagram-btn {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold;
+            display: inline-flex; align-items: center; gap: 10px; margin-top: 15px;
+        }
+        .instagram-btn:hover { opacity: 0.9; transform: scale(1.05); }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2rem; }
+            nav { display: none; } 
+            header { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-robot"></i> ROBÓTICA <span>GALDINO</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#sobre">História</a></li>
+                <li><a href="#participar">Participar</a></li>
+                <li><a href="#robos">Projetos</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p>COLÉGIO GALDINO DE LIMA</p>
+            <h1>TECNOLOGIA EM<br>MOVIMENTO</h1>
+            <p>Desde 2023 criando o futuro com a Prof. Silvana</p>
+            <a href="#participar" class="btn btn-primary">COMO PARTICIPAR</a>
+        </div>
+    </section>
+
+    <section id="sobre">
+        <h2 class="section-title">NOSSA TRAJETÓRIA</h2>
+        <div class="about-text">
+            <p>
+                A equipe de robótica do <strong>Colégio Galdino de Lima</strong> nasceu em <span class="highlight">2023</span>, guiada pela dedicação da <span class="highlight">Prof. Silvana</span>. 
+                O que começou como curiosidade em sala de aula se transformou em uma equipe competitiva e apaixonada por tecnologia.
+            </p>
+            <br>
+            <p>
+                Nosso objetivo é aplicar conceitos de física e matemática na prática, construindo máquinas capazes de competir, resolver problemas e inovar.
+            </p>
+        </div>
+    </section>
+
+    <section id="participar" style="background-color: #0e1525;">
+        <h2 class="section-title">QUEM PODE PARTICIPAR?</h2>
+        <div class="join-container">
+            
+            <div class="join-card">
+                <i class="fas fa-user-graduate"></i>
+                <h3>ESTUDANTES DO COLÉGIO</h3>
+                <p>O projeto é <strong>exclusivo</strong> para alunos devidamente matriculados no Colégio Galdino de Lima, do Ensino Fundamental II ou Médio.</p>
+            </div>
+
+            <div class="join-card">
+                <i class="fas fa-brain"></i>
+                <h3>O QUE PRECISA?</h3>
+                <p>Não precisa ser expert! Basta ter curiosidade, comprometimento com os horários e vontade de aprender a trabalhar em equipe.</p>
+            </div>
+
+            <div class="join-card">
+                <i class="fas fa-comments"></i>
+                <h3>COMO ENTRAR?</h3>
+                <p>Procure a <strong>Prof. Silvana</strong> e/ou as <strong>coordenadoras do seu turno</strong> para saber sobre novas vagas ou períodos de inscrição.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="robos">
+        <h2 class="section-title">NOSSAS CRIAÇÕES</h2>
+        <div class="robots-grid">
+            <div class="robot-card">
+                <div class="robot-icon"><i class="fas fa-weight-hanging"></i></div>
+                <div class="robot-info">
+                    <h3>ROBÔ SUMÔ</h3>
+                    <p>Força bruta e sensores de linha para empurrar o oponente para fora do dojo.</p>
+                </div>
+            </div>
+
+            <div class="robot-card">
+                <div class="robot-icon"><i class="fas fa-tachometer-alt"></i></div>
+                <div class="robot-info">
+                    <h3>SEGUIDOR DE LINHA</h3>
+                    <p>Velocidade e precisão usando programação PID para seguir trajetos complexos.</p>
+                </div>
+            </div>
+
+            <div class="robot-card">
+                <div class="robot-icon"><i class="fas fa-link"></i></div>
+                <div class="robot-info">
+                    <h3>CABO DE GUERRA</h3>
+                    <p>Estrutura reforçada e alto torque para competições de tração máxima.</p>
+                </div>
+            </div>
+
+            <div class="robot-card">
+                <div class="robot-icon"><i class="fas fa-hand-holding"></i></div>
+                <div class="robot-info">
+                    <h3>BRAÇO ROBÓTICO</h3>
+                    <p>Automação e controle remoto para manipulação delicada de objetos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="eventos" style="background-color: #0e1525;">
+        <h2 class="section-title">ONDE COMPETIMOS</h2>
+        <div class="events-grid">
+            <div class="event-card">
+                <h3><i class="fas fa-leaf"></i> AGRINHO 2024 & 2025</h3>
+                <p>Projetos focados em tecnologia e inovação para o campo e sustentabilidade.</p>
+            </div>
+            <div class="event-card">
+                <h3><i class="fas fa-trophy"></i> DESAFIO PREMEN</h3>
+                <p>Competição interescolar de robótica, testando estratégia e programação.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato">
+        <h2>ACOMPANHE A EQUIPE</h2>
+        <p style="margin-top: 10px; color: #aaa;">Veja o perfil oficial do Colégio no Instagram, lá você encontrará alguns de nossos projetos.</p>
+        
+        <a href="https://www.instagram.com/colegio_galdino/?hl=af" target="_blank" class="instagram-btn">
+            <i class="fab fa-instagram"></i> @colegio_galdino
+        </a>
+
+        <br><br><br>
+        <p style="font-size: 0.8rem; opacity: 0.5;">&copy; 2026 Robótica Galdino de Lima</p>
+    </section>
+
+</body>
+</html>
